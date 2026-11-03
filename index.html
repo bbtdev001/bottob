@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boris Botto · SAP Developer & Tech Consultant</title>
+<meta name="description" content="Boris Botto – SAP Developer & Tech Consultant. Working across SK, D, A, CH.">
+<meta property="og:title" content="Boris Botto · SAP Developer & Tech Consultant">
+<meta property="og:description" content="SAP development and technical consulting across SK, D, A, CH.">
+<meta name="theme-color" content="#1675e0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&family=Fira+Sans:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#072638;
+    --blue:#1675e0;
+    --blue-2:#0d8eea;
+    --cyan:#09b4f3;
+    --aqua:#00d8f2;
+    --indigo:#2f5bff;
+    --lavender:#cfcdf0;
+    --mist:#e6ebfb;
+    --flag:#63c4f5;
+    --bg:#ffffff;
+    --muted:#4a6476;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg);
+    color:var(--navy);
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:min(92vh,760px);
+    display:flex;align-items:center;
+    padding:96px 16px 40px;
+    min-height:auto;
+    isolation:isolate;
+  }
+  .blob{position:absolute;pointer-events:none;z-index:-1}
+  .blob-top{top:0;right:0;width:min(58vw,720px);height:auto}
+  .wave-wrap{background:var(--mist);line-height:0;margin-top:-1px}
+  .page-wave{display:block;width:100%;height:auto;aspect-ratio:1440/170;min-height:110px}
+  .hero-inner{width:100%;max-width:1080px;margin:0 auto}
+  h1{
+    margin:0;
+    font-weight:800;
+    font-size:clamp(2.6rem,8vw,5.4rem);
+    letter-spacing:.01em;
+    line-height:1;
+    text-transform:uppercase;
+  }
+  .role{
+    margin:.6rem 0 0;
+    color:var(--blue);
+    font-weight:400;
+    font-size:clamp(1.05rem,2.9vw,2rem);
+    letter-spacing:.04em;
+    text-transform:uppercase;
+  }
+  .facts{
+    list-style:none;padding:0;margin:2.6rem 0 0;
+    display:flex;flex-wrap:wrap;gap:14px 34px;
+    font-size:clamp(1rem,1.8vw,1.25rem);
+  }
+  .facts li{display:flex;align-items:center;gap:12px}
+  .facts a{text-decoration:none}
+  .facts a:hover{color:var(--blue)}
+  .ico{
+    width:42px;height:42px;border-radius:50%;
+    background:var(--blue);display:grid;place-items:center;flex:none;
+  }
+  .ico svg{width:22px;height:22px;fill:#fff}
+
+  /* ---------- sections ---------- */
+  section{padding:72px 16px}
+  .wrap{max-width:1080px;margin:0 auto}
+  h2{
+    margin:0 0 .4rem;
+    font-weight:800;font-size:clamp(1.6rem,3.4vw,2.4rem);
+    text-transform:uppercase;letter-spacing:.02em;
+  }
+  .lead{margin:0 0 2.2rem;color:var(--muted);font-size:1.05rem;max-width:56ch}
+
+  /* ---------- rotating greeting ---------- */
+  .greet{
+    margin:0 0 1.6rem;
+    font-size:clamp(1.9rem,4.6vw,3.2rem);
+    text-transform:none;letter-spacing:0;line-height:1.15;
+    min-height:1.2em;
+  }
+  #greet-text{
+    display:inline-block;
+    background:linear-gradient(90deg,var(--blue) 0%,var(--blue-2) 55%,var(--cyan) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    transition:opacity .35s ease,transform .35s ease;
+  }
+  #greet-text.out{opacity:0;transform:translateY(10px)}
+
+  /* ---------- flowchart ---------- */
+  .flow{display:block;width:100%;height:auto;overflow:visible}
+  .flow-narrow{display:none}
+  @media (max-width:720px){
+    .flow-wide{display:none}
+    .flow-narrow{display:block}
+  }
+  .flow .wire{fill:none;stroke:var(--blue-2);stroke-width:4;stroke-linecap:round;transition:stroke .2s,stroke-width .2s}
+  .flow .wire.lit{stroke:var(--aqua);stroke-width:6}
+  .flow .wire-out{stroke:var(--cyan)}
+  .flow .dot{fill:var(--blue-2)}
+  .flow .dot-out{fill:var(--cyan)}
+  .flow .flag{fill:var(--flag)}
+  .flow .node{cursor:pointer;outline:none}
+  .flow .node rect{fill:var(--blue-2);transition:fill .2s,filter .2s}
+  .flow .node text{
+    fill:#fff;font-family:"Fira Sans",Inter,sans-serif;font-weight:700;
+    text-anchor:middle;font-size:34px;letter-spacing:.01em;pointer-events:none;
+  }
+  .flow .hub text{font-size:40px}
+  .flow .node.active rect,.flow .node:hover rect,.flow .node:focus-visible rect{fill:var(--blue);filter:drop-shadow(0 8px 14px rgba(22,117,224,.35))}
+  .flow .node:focus-visible rect{stroke:var(--navy);stroke-width:4}
+  .flow-hint{
+    margin:1.2rem 0 0;text-align:center;color:var(--muted);font-size:.98rem;min-height:1.5em;
+  }
+  .flow-hint strong{color:var(--blue);font-weight:500}
+
+  /* ---------- tag cloud ---------- */
+  .cloud-section{
+    padding-bottom:24px;
+    background:linear-gradient(180deg,#fff 0%,var(--mist) 100%);
+  }
+  .cloud{
+    list-style:none;margin:0 auto;padding:0;max-width:900px;
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+    gap:10px 22px;line-height:1.1;
+  }
+  .cloud li{font-weight:500;transition:transform .15s,color .15s;cursor:default}
+  .cloud li:hover{transform:translateY(-2px);color:var(--indigo)}
+  .w5{font-size:clamp(1.9rem,4.4vw,2.8rem);font-weight:800 !important;color:var(--blue)}
+  .w4{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800 !important;color:var(--navy)}
+  .w3{font-size:clamp(1.2rem,2.5vw,1.55rem);color:var(--blue-2)}
+  .w2{font-size:clamp(1rem,2vw,1.2rem);color:var(--navy)}
+  .w1{font-size:clamp(.9rem,1.6vw,1rem);color:var(--muted)}
+
+  footer{
+    background:var(--navy);color:#cfe3f5;
+    padding:28px 16px;font-size:.92rem;
+  }
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+  footer a{color:#fff;text-decoration:none}
+  footer a:hover{color:var(--aqua)}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <!-- top-right blob -->
+  <svg class="blob blob-top" viewBox="0 0 600 240" aria-hidden="true">
+    <defs>
+      <linearGradient id="bt" x1="0" y1="0" x2="1" y2=".3">
+        <stop offset="0" stop-color="#1675e0"/><stop offset="1" stop-color="#0ab0f2"/>
+      </linearGradient>
+      <linearGradient id="leaf" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#1675e0"/><stop offset="1" stop-color="#00d8f2"/>
+      </linearGradient>
+    </defs>
+    <path d="M40 0 C40 70 110 85 210 115 C330 150 430 205 510 185 C560 172 590 140 600 120 L600 0 Z" fill="#cfcdf0"/>
+    <path d="M30 0 C40 55 120 70 220 100 C330 130 440 185 520 170 C565 160 590 130 600 105 L600 0 Z" fill="#a9c2ee" opacity=".85"/>
+    <path d="M0 0 C40 50 130 55 240 85 C340 115 420 160 500 150 C550 142 585 110 600 85 L600 0 Z" fill="url(#bt)"/>
+    <path d="M488 192 C500 170 525 162 548 166 C568 170 568 188 548 202 C530 216 500 222 490 214 C485 208 484 200 488 192 Z" fill="url(#leaf)"/>
+    <g fill="#fff" opacity=".9">
+      <circle cx="520" cy="30" r="2.3"/><circle cx="535" cy="30" r="2.3"/><circle cx="550" cy="30" r="2.3"/><circle cx="565" cy="30" r="2.3"/><circle cx="580" cy="30" r="2.3"/>
+      <circle cx="520" cy="44" r="2.3"/><circle cx="535" cy="44" r="2.3"/><circle cx="550" cy="44" r="2.3"/><circle cx="565" cy="44" r="2.3"/><circle cx="580" cy="44" r="2.3"/>
+      <circle cx="520" cy="58" r="2.3"/><circle cx="535" cy="58" r="2.3"/><circle cx="550" cy="58" r="2.3"/><circle cx="565" cy="58" r="2.3"/><circle cx="580" cy="58" r="2.3"/>
+    </g>
+  </svg>
+
+
+  <div class="hero-inner">
+    <h1>Boris Botto</h1>
+    <p class="role">SAP Developer &amp; Tech Consultant</p>
+    <ul class="facts">
+      <li>
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.4 2L12 12.2 19.6 7H4.4zM20 8.7l-7.4 5a1 1 0 0 1-1.2 0L4 8.7V17h16V8.7z"/></svg></span>
+        <a href="mailto:kontakt@bottob.sk">kontakt@bottob.sk</a>
+      </li>
+      <li>
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 5.2-7 13-7 13S5 14.2 5 9a7 7 0 0 1 7-7zm0 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></span>
+        SK, D, A, CH
+      </li>
+      <li>
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg></span>
+        <a href="https://www.linkedin.com/in/borisbotto" target="_blank" rel="noopener">/borisbotto</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 class="greet" aria-live="polite"><span id="greet-text" lang="sk">Napíšte mi</span></h2>
+<svg class="flow flow-wide" viewBox="0 0 1000 580" role="img" aria-label="Contact flowchart: pick a greeting to send an email">
+<defs><linearGradient id="gw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1675e0"/><stop offset="1" stop-color="#0aa6f2"/></linearGradient></defs>
+<path class="wire" data-for="ahoj" d="M210 80 H268 Q290 80 290 102 V268 Q290 290 312 290 H354"/>
+<path class="wire" data-for="hello" d="M210 220 H268 Q290 220 290 242 V268 Q290 290 312 290 H354"/>
+<path class="wire" data-for="hallo" d="M210 360 H268 Q290 360 290 338 V312 Q290 290 312 290 H354"/>
+<path class="wire" data-for="gruezi" d="M210 500 H268 Q290 500 290 478 V312 Q290 290 312 290 H354"/>
+<circle class="dot" cx="354" cy="290" r="7"/>
+<a class="node pill" href="mailto:ahoj@bottob.sk" data-mail="ahoj"><title>ahoj@bottob.sk</title><rect x="20" y="38.0" width="190" height="84" rx="42.0"/><text x="115.0" y="80" dy=".35em">AHOJ</text></a>
+<a class="node pill" href="mailto:hello@bottob.sk" data-mail="hello"><title>hello@bottob.sk</title><rect x="20" y="178.0" width="190" height="84" rx="42.0"/><text x="115.0" y="220" dy=".35em">HELLO</text></a>
+<a class="node pill" href="mailto:hallo@bottob.sk" data-mail="hallo"><title>hallo@bottob.sk</title><rect x="20" y="318.0" width="190" height="84" rx="42.0"/><text x="115.0" y="360" dy=".35em">HALLO</text></a>
+<a class="node pill" href="mailto:gruezi@bottob.sk" data-mail="gruezi"><title>gruezi@bottob.sk</title><rect x="20" y="458.0" width="190" height="84" rx="42.0"/><text x="115.0" y="500" dy=".35em">GRÜEZI</text></a>
+<a class="node hub" href="mailto:kontakt@bottob.sk"><title>kontakt@bottob.sk</title><rect x="360" y="238.0" width="300" height="104" rx="16"/><text x="510.0" y="290" dy=".35em" textLength="244" lengthAdjust="spacingAndGlyphs">@BOTTOB.SK</text></a>
+<path class="wire wire-out" d="M660 290 H740"/><circle class="dot dot-out" cx="740" cy="290" r="7"/>
+<polygon class="flag" points="746,240 946,240 876,340 746,340"/>
+</svg>
+<svg class="flow flow-narrow" viewBox="0 0 620 580" role="img" aria-label="Contact flowchart: pick a greeting to send an email">
+<defs><linearGradient id="gn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1675e0"/><stop offset="1" stop-color="#0aa6f2"/></linearGradient></defs>
+<path class="wire" data-for="ahoj" d="M190 80 H213 Q235 80 235 102 V268 Q235 290 257 290 H274"/>
+<path class="wire" data-for="hello" d="M190 220 H213 Q235 220 235 242 V268 Q235 290 257 290 H274"/>
+<path class="wire" data-for="hallo" d="M190 360 H213 Q235 360 235 338 V312 Q235 290 257 290 H274"/>
+<path class="wire" data-for="gruezi" d="M190 500 H213 Q235 500 235 478 V312 Q235 290 257 290 H274"/>
+<circle class="dot" cx="274" cy="290" r="7"/>
+<a class="node pill" href="mailto:ahoj@bottob.sk" data-mail="ahoj"><title>ahoj@bottob.sk</title><rect x="20" y="40.0" width="170" height="80" rx="40.0"/><text x="105.0" y="80" dy=".35em">AHOJ</text></a>
+<a class="node pill" href="mailto:hello@bottob.sk" data-mail="hello"><title>hello@bottob.sk</title><rect x="20" y="180.0" width="170" height="80" rx="40.0"/><text x="105.0" y="220" dy=".35em">HELLO</text></a>
+<a class="node pill" href="mailto:hallo@bottob.sk" data-mail="hallo"><title>hallo@bottob.sk</title><rect x="20" y="320.0" width="170" height="80" rx="40.0"/><text x="105.0" y="360" dy=".35em">HALLO</text></a>
+<a class="node pill" href="mailto:gruezi@bottob.sk" data-mail="gruezi"><title>gruezi@bottob.sk</title><rect x="20" y="460.0" width="170" height="80" rx="40.0"/><text x="105.0" y="500" dy=".35em">GRÜEZI</text></a>
+<a class="node hub" href="mailto:kontakt@bottob.sk"><title>kontakt@bottob.sk</title><rect x="280" y="238.0" width="310" height="104" rx="16"/><text x="435.0" y="290" dy=".35em" textLength="254" lengthAdjust="spacingAndGlyphs">@BOTTOB.SK</text></a>
+</svg>
+
+    <p class="flow-hint" id="hint" aria-live="polite">Click a greeting, or the centre for <strong>kontakt@bottob.sk</strong></p>
+  </div>
+</section>
+
+<section class="cloud-section" id="expertise">
+  <div class="wrap">
+    <h2 style="text-align:center">Expertise</h2>
+    <p class="lead" style="margin-left:auto;margin-right:auto;text-align:center">SAP topics I work with.</p>
+    <!-- Edit freely: w5 = largest … w1 = smallest -->
+    <ul class="cloud">
+      <li class="w2">BAPI</li>
+      <li class="w3">CDS Views</li>
+      <li class="w1">SAPscript</li>
+      <li class="w4">S/4HANA</li>
+      <li class="w2">IDoc</li>
+      <li class="w3">SAP Fiori</li>
+      <li class="w1">Web Dynpro</li>
+      <li class="w5">ABAP</li>
+      <li class="w2">AMDP</li>
+      <li class="w3">OData</li>
+      <li class="w1">Smart Forms</li>
+      <li class="w4">SAP BTP</li>
+      <li class="w2">BAdI &amp; Enhancements</li>
+      <li class="w3">RAP</li>
+      <li class="w1">ALE</li>
+      <li class="w2">Adobe Forms</li>
+      <li class="w5">ABAP OO</li>
+      <li class="w3">SAPUI5</li>
+      <li class="w1">RFC</li>
+      <li class="w2">SAP Gateway</li>
+      <li class="w4">Clean Core</li>
+      <li class="w2">ALV</li>
+      <li class="w3">Integration Suite</li>
+      <li class="w1">abapGit</li>
+      <li class="w2">SD · MM · FI/CO</li>
+      <li class="w3">ABAP Cloud</li>
+      <li class="w1">Performance Tuning</li>
+      <li class="w2">SAP HANA</li>
+      <li class="w1">Workflow</li>
+      <li class="w2">CAP</li>
+      <li class="w1">Code Review</li>
+    </ul>
+  </div>
+</section>
+
+<div class="wave-wrap" aria-hidden="true">
+<!-- bottom wave -->
+  <svg class="page-wave" viewBox="0 130 1440 170" preserveAspectRatio="xMinYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="bw" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#2f5bff"/><stop offset=".5" stop-color="#1191ec"/><stop offset="1" stop-color="#00d8f2"/>
+      </linearGradient>
+    </defs>
+    
+    <path d="M0 135 C260 200 560 232 860 254 C1050 270 1180 285 1280 300 L0 300 Z" fill="url(#bw)"/>
+    <g fill="#fff" opacity=".9">
+      <circle cx="130" cy="230" r="2.6"/><circle cx="152" cy="230" r="2.6"/><circle cx="174" cy="230" r="2.6"/><circle cx="196" cy="230" r="2.6"/><circle cx="218" cy="230" r="2.6"/><circle cx="240" cy="230" r="2.6"/>
+      <circle cx="130" cy="248" r="2.6"/><circle cx="152" cy="248" r="2.6"/><circle cx="174" cy="248" r="2.6"/><circle cx="196" cy="248" r="2.6"/><circle cx="218" cy="248" r="2.6"/><circle cx="240" cy="248" r="2.6"/>
+      <circle cx="130" cy="266" r="2.6"/><circle cx="152" cy="266" r="2.6"/><circle cx="174" cy="266" r="2.6"/><circle cx="196" cy="266" r="2.6"/><circle cx="218" cy="266" r="2.6"/><circle cx="240" cy="266" r="2.6"/>
+    </g>
+  </svg>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="y">2026</span> Boris Botto · SAP Developer &amp; Tech Consultant</span>
+    <span><a href="mailto:kontakt@bottob.sk">kontakt@bottob.sk</a> · <a href="https://www.linkedin.com/in/borisbotto" target="_blank" rel="noopener">LinkedIn</a></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  // rotating multilingual heading, synced with the flowchart
+  var GREETS = [
+    {key:'ahoj',   lang:'sk',    text:'Napíšte mi'},
+    {key:'hello',  lang:'en',    text:'Write to me'},
+    {key:'hallo',  lang:'de',    text:'Schreiben Sie mir'},
+    {key:'gruezi', lang:'de-CH', text:'Schriibed Sie mir'}
+  ];
+  var el = document.getElementById('greet-text');
+  var hint = document.getElementById('hint'), base = hint.innerHTML;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var idx = 0, timer = null, hovering = false;
+
+  function highlight(key){
+    document.querySelectorAll('.flow .node.active').forEach(function(n){n.classList.remove('active')});
+    document.querySelectorAll('.flow .wire.lit').forEach(function(w){w.classList.remove('lit')});
+    if (!key) return;
+    document.querySelectorAll('.flow .node[data-mail="'+key+'"]').forEach(function(n){n.classList.add('active')});
+    document.querySelectorAll('.flow .wire[data-for="'+key+'"]').forEach(function(w){w.classList.add('lit')});
+  }
+  function show(i, instant){
+    var g = GREETS[i];
+    highlight(g.key);
+    hint.innerHTML = 'Write to <strong>' + g.key + '@bottob.sk</strong>';
+    if (el.textContent === g.text) return;
+    if (instant || reduce){ el.textContent = g.text; el.lang = g.lang; return; }
+    el.classList.add('out');
+    setTimeout(function(){ el.textContent = g.text; el.lang = g.lang; el.classList.remove('out'); }, 350);
+  }
+  function start(){
+    if (reduce) return;
+    stop();
+    timer = setInterval(function(){ idx = (idx + 1) % GREETS.length; show(idx); }, 2600);
+  }
+  function stop(){ if (timer) clearInterval(timer); timer = null; }
+
+  document.querySelectorAll('.flow .node').forEach(function (n) {
+    var key = n.getAttribute('data-mail');
+    function on(){
+      hovering = true; stop();
+      if (key){
+        idx = GREETS.findIndex(function(g){return g.key===key});
+        show(idx, false);
+      } else {
+        highlight(null);
+        n.classList.add('active');
+        hint.innerHTML = 'Write to <strong>kontakt@bottob.sk</strong>';
+      }
+    }
+    function off(){ hovering = false; n.classList.remove('active'); show(idx, true); start(); }
+    n.addEventListener('mouseenter', on); n.addEventListener('focus', on);
+    n.addEventListener('mouseleave', off); n.addEventListener('blur', off);
+  });
+
+  if (reduce){ highlight(null); hint.innerHTML = base; } else { show(0, true); start(); }
+</script>
+</body>
+</html>
