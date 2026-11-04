@@ -42,7 +42,7 @@
     position:relative;
     min-height:min(92vh,760px);
     display:flex;align-items:center;
-    padding:96px 16px 40px;
+    padding:80px 16px 28px;
     min-height:auto;
     isolation:isolate;
   }
@@ -73,6 +73,7 @@
     font-size:clamp(1rem,1.8vw,1.25rem);
   }
   .facts li{display:flex;align-items:center;gap:12px}
+  @media (max-width:720px){.facts{flex-direction:column;gap:12px}}
   .facts a{text-decoration:none}
   .facts a:hover{color:var(--blue)}
   .ico{
@@ -82,7 +83,7 @@
   .ico svg{width:22px;height:22px;fill:#fff}
 
   /* ---------- sections ---------- */
-  section{padding:72px 16px}
+  section{padding:44px 16px}
   .wrap{max-width:1080px;margin:0 auto}
   h2{
     margin:0 0 .4rem;
@@ -91,9 +92,46 @@
   }
   .lead{margin:0 0 2.2rem;color:var(--muted);font-size:1.05rem;max-width:56ch}
 
+  /* ---------- services ---------- */
+  .services{padding-top:12px}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media (max-width:860px){.cards{grid-template-columns:1fr}}
+  .card{
+    position:relative;background:#fff;border:1px solid #e1e8f8;border-radius:22px;
+    padding:26px 26px 22px;
+    box-shadow:0 10px 30px -18px rgba(22,117,224,.35);
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+  }
+  .card:hover{transform:translateY(-3px);border-color:#bcd2f6;box-shadow:0 18px 36px -18px rgba(22,117,224,.45)}
+  .card .cico{
+    width:50px;height:50px;border-radius:14px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--blue),var(--cyan));margin-bottom:16px;
+  }
+  .card .cico svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{margin:0 0 .45rem;font-size:1.2rem;font-weight:800;letter-spacing:.01em}
+  .card p{margin:0 0 1rem;color:var(--muted);line-height:1.55;font-size:.98rem}
+  .card .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+  .card .chips li{font-size:.8rem;font-weight:500;color:var(--blue);background:#eef4fe;border-radius:999px;padding:4px 10px}
+
+  /* ---------- contact panel ---------- */
+  .panel{
+    position:relative;overflow:hidden;isolation:isolate;
+    background:linear-gradient(135deg,#f4f7ff 0%,#e8eefc 60%,#e4e4f7 100%);
+    border-radius:28px;padding:40px clamp(20px,4vw,52px) 36px;
+  }
+  .panel::before{ /* dot grid, as on the card */
+    content:"";position:absolute;right:28px;top:28px;width:110px;height:62px;z-index:-1;
+    background-image:radial-gradient(circle,var(--blue-2) 2.2px,transparent 2.6px);
+    background-size:22px 22px;opacity:.35;
+  }
+  .panel::after{ /* soft lavender corner blob */
+    content:"";position:absolute;left:-120px;bottom:-140px;width:360px;height:300px;z-index:-1;
+    background:radial-gradient(closest-side,rgba(207,205,240,.9),rgba(207,205,240,0));
+  }
+
   /* ---------- rotating greeting ---------- */
   .greet{
-    margin:0 0 1.6rem;
+    margin:0 0 1rem;
     font-size:clamp(1.9rem,4.6vw,3.2rem);
     text-transform:none;letter-spacing:0;line-height:1.15;
     min-height:1.2em;
@@ -129,7 +167,7 @@
   .flow .node.active rect,.flow .node:hover rect,.flow .node:focus-visible rect{fill:var(--blue);filter:drop-shadow(0 8px 14px rgba(22,117,224,.35))}
   .flow .node:focus-visible rect{stroke:var(--navy);stroke-width:4}
   .flow-hint{
-    margin:1.2rem 0 0;text-align:center;color:var(--muted);font-size:.98rem;min-height:1.5em;
+    margin:.6rem 0 0;text-align:center;color:var(--muted);font-size:.98rem;min-height:1.5em;
   }
   .flow-hint strong{color:var(--blue);font-weight:500}
 
@@ -207,8 +245,32 @@
   </div>
 </header>
 
+<section class="services" id="services">
+  <!-- Edit the texts freely -->
+  <div class="wrap cards">
+    <article class="card">
+      <div class="cico"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg></div>
+      <h3>Development</h3>
+      <p>Clean, maintainable ABAP for S/4HANA and ECC – from reports and enhancements to modern RAP-based apps.</p>
+      <ul class="chips"><li>ABAP OO</li><li>RAP</li><li>CDS</li></ul>
+    </article>
+    <article class="card">
+      <div class="cico"><svg viewBox="0 0 24 24"><path d="M7 7h10M13 3l4 4-4 4M17 17H7M11 13l-4 4 4 4"/></svg></div>
+      <h3>Integration</h3>
+      <p>Connecting SAP with the rest of your landscape through APIs, IDocs and SAP BTP services.</p>
+      <ul class="chips"><li>OData</li><li>IDoc</li><li>BTP</li></ul>
+    </article>
+    <article class="card">
+      <div class="cico"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-3.5 10.9V17h7v-3.1A6 6 0 0 0 12 3zM9.5 21h5"/></svg></div>
+      <h3>Consulting</h3>
+      <p>Technical guidance for upgrades, S/4HANA transitions and keeping the core clean and upgrade-safe.</p>
+      <ul class="chips"><li>S/4HANA</li><li>Clean Core</li><li>Code Review</li></ul>
+    </article>
+  </div>
+</section>
+
 <section id="contact">
-  <div class="wrap">
+  <div class="wrap panel">
     <h2 class="greet" aria-live="polite"><span id="greet-text" lang="sk">Napíšte mi</span></h2>
 <svg class="flow flow-wide" viewBox="0 0 1000 580" role="img" aria-label="Contact flowchart: pick a greeting to send an email">
 <defs><linearGradient id="gw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1675e0"/><stop offset="1" stop-color="#0aa6f2"/></linearGradient></defs>
@@ -313,16 +375,20 @@
   document.getElementById('y').textContent = new Date().getFullYear();
   // rotating multilingual heading, synced with the flowchart
   var GREETS = [
-    {key:'ahoj',   lang:'sk',    text:'Napíšte mi'},
-    {key:'hello',  lang:'en',    text:'Write to me'},
-    {key:'hallo',  lang:'de',    text:'Schreiben Sie mir'},
-    {key:'gruezi', lang:'de-CH', text:'Schriibed Sie mir'}
+    {key:'ahoj',   lang:'sk',    text:'Napíšte mi',        hint:'Napíšte na'},
+    {key:'hello',  lang:'en',    text:'Write to me',       hint:'Write to'},
+    {key:'hallo',  lang:'de',    text:'Schreiben Sie mir', hint:'Schreiben Sie an'},
+    {key:'gruezi', lang:'de-CH', text:'Schriibed Sie mir', hint:'Schreiben Sie an'}
   ];
   var el = document.getElementById('greet-text');
   var hint = document.getElementById('hint'), base = hint.innerHTML;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var idx = 0, timer = null, hovering = false;
 
+  function setHint(g, addr){
+    hint.lang = g.lang.indexOf('de') === 0 ? 'de' : g.lang;
+    hint.innerHTML = g.hint + ' <strong>' + addr + '</strong>';
+  }
   function highlight(key){
     document.querySelectorAll('.flow .node.active').forEach(function(n){n.classList.remove('active')});
     document.querySelectorAll('.flow .wire.lit').forEach(function(w){w.classList.remove('lit')});
@@ -333,7 +399,7 @@
   function show(i, instant){
     var g = GREETS[i];
     highlight(g.key);
-    hint.innerHTML = 'Write to <strong>' + g.key + '@bottob.sk</strong>';
+    setHint(g, g.key + '@bottob.sk');
     if (el.textContent === g.text) return;
     if (instant || reduce){ el.textContent = g.text; el.lang = g.lang; return; }
     el.classList.add('out');
@@ -356,7 +422,7 @@
       } else {
         highlight(null);
         n.classList.add('active');
-        hint.innerHTML = 'Write to <strong>kontakt@bottob.sk</strong>';
+        setHint(GREETS[idx], 'kontakt@bottob.sk');
       }
     }
     function off(){ hovering = false; n.classList.remove('active'); show(idx, true); start(); }
